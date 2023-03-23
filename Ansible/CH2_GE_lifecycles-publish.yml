@@ -4,7 +4,6 @@
   vars_files: sat_vars.yml
   vars:
     org_name_one: Operations
-    org_name_two: Marketing
     cv_name: OperationsServerBase
     base_cv_repos: Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9
 
@@ -71,3 +70,102 @@
         lifecycle_environments:
           - Library
           - Development
+
+
+- name: Complete Chapter 2 GE - Publish and Promote Content Views (Marketing)
+  hosts: localhost
+  vars_files: sat_vars.yml
+  vars:
+    org_name: Marketing
+    org_name_one: Marketing
+    cv_name: MarketingServerBase
+    base_cv_repos: Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9
+    sat_repos:
+      - rhel-9-for-x86_64-appstream-rpms 
+      - rhel-9-for-x86_64-baseos-rpms 
+    sat_client_repos:
+      - satellite-client-6-for-rhel-9-x86_64-rpms
+
+  tasks:
+    - name: Enable Repositories for RHEL Servers
+      redhat.satellite.repository_set:
+        label: "{{ item }}"
+        organization: "{{ org_name }}"
+        state: enabled
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        repositories:
+          - releasever: "9"
+      loop: "{{ sat_repos }}"
+
+    - name: Enable Repositories Satellite Clients 
+      redhat.satellite.repository_set:
+        label: "{{ item }}"
+        organization: "{{ org_name }}"
+        state: enabled
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        all_repositories: yes
+      loop: "{{ sat_client_repos }}"
+
+    - name: Sync Repositories
+      redhat.satellite.repository_sync:
+        organization: "{{ org_name }}"
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        product: Red Hat Enterprise Linux for x86_64
+
+    - name: Create the Base Content View
+      redhat.satellite.content_view:
+        name: "{{ cv_name }}"
+        organization: "{{ org_name_one }}"
+        state: present
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        repositories:
+          - name: Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9
+            product: Red Hat Enterprise Linux for x86_64
+          - name: Red Hat Satellite Client 6 for RHEL 9 x86_64 RPMs
+            product: Red Hat Enterprise Linux for x86_64
+          - name: Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9 
+            product: Red Hat Enterprise Linux for x86_64           
+
+    - name: Publish the Base Content View - Not Idempotent
+      redhat.satellite.content_view_version:
+        content_view: "{{ cv_name }}"
+        organization: "{{ org_name_one }}"
+        state: present
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        description: Initial base repositories
+        lifecycle_environments:
+          - Library
+          - Development
+
+    - name: Verification of environments to screen
+      shell: hammer content-view list --organization Marketing --fields Name,"Last Published","Repository Ids"
+      register: marketing_cv_list
+      delegate_to: satellite.lab.example.com 
+
+    - name: Verification of environments to screen
+      shell:hammer content-view version list --organization Marketing --content-view MarketingServerBase --fields Name,Description,"Lifecycle Environments"
+      register: marketing_cv_lcm
+      delegate_to: satellite.lab.example.com 
+
+    - name: Marketing Content View and Lifecycle Environments
+      debug: 
+        var: marketing_cv_list.stdout_lines
+
+    - name: Marketing Lifecycle Environment Paths 
+      debug: 
+        var: mmarketing_cv_lcm.stdout_lines
