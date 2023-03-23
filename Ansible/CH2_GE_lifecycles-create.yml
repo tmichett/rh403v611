@@ -61,6 +61,10 @@
       register: operations_envs
       delegate_to: satellite.lab.example.com 
 
-    - name: Output Environment Paths 
+    - name: Operations Lifecycle Environment Paths 
       debug: 
-        msg: The path for operations is {{ operations_envs.stdout }} and the path for marketing is {{ marketing_envs.stdout }}
+        var: operations_envs.stdout_lines
+
+    - name: Marketing Lifecycle Environment Paths 
+      debug: 
+        var: marketing_envs.stdout_lines
