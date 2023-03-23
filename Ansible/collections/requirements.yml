@@ -2,3 +2,5 @@
 collections:
   - name: "/tmp/redhat-satellite-3.9.0.tar.gz"
     type: file
+  - name: "/tmp/ansible-posix-1.5.1.tar.gz"
+    type: file

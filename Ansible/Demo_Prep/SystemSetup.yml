@@ -9,3 +9,7 @@
         src: Files/redhat-satellite-3.9.0.tar.gz
         dest: /tmp
 
+    - name: Copy Red Hat Satellite Collections
+      copy:
+        src: Files/ansible-posix-1.5.1.tar.gz
+        dest: /tmp

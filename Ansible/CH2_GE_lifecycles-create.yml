@@ -63,4 +63,4 @@
 
     - name: Output Environment Paths 
       debug: 
-        msg: The path for operations is {{ operations_envs.stdou }} and the path for marketing is {{ marketing_envs.stdout }}
+        msg: The path for operations is {{ operations_envs.stdout }} and the path for marketing is {{ marketing_envs.stdout }}
