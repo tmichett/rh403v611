@@ -5,14 +5,14 @@
   vars:
     org_name: Operations
     sat_repos:
-      - Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9 
-      - Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9 
-      - Red Hat Satellite Client 6 for RHEL 9 x86_64 (RPMs)
-      
+      - rhel-9-for-x86_64-appstream-rpms 
+      - rhel-9-for-x86_64-baseos-rpms 
+      - satellite-client-6-for-rhel-9-x86_64-rpms
+
   tasks:
     - name: Enable Repositories
       redhat.satellite.repository_set:
-        name: "{{ item }}"
+        label: "{{ item }}"
         organization: "{{ org_name }}"
         state: enabled
         server_url: "{{ sat_url }}"
