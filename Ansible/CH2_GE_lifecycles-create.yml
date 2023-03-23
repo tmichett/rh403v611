@@ -51,6 +51,16 @@
         validate_certs: "{{ cert_validate }}"
       loop: "{{ org_name }}"
 
+    - name: Verification of environments to screen
+      shell: hammer lifecycle-environment paths --organization Marketing
+      register: marketing_envs
+      delegate_to: satellite.lab.example.com 
+
+    - name: Verification of environments to screen
+      shell: hammer lifecycle-environment paths --organization Operations
+      register: operations_envs
+      delegate_to: satellite.lab.example.com 
+
     - name: Operations Lifecycle Environment Paths 
       debug: 
         var: operations_envs.stdout_lines
