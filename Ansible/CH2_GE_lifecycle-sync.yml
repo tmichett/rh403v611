@@ -1,0 +1,61 @@
+---
+- name: Complete Chapter 2 GE - Synchronize Red Hat Content 
+  hosts: localhost
+  vars_files: sat_vars.yml
+  vars:
+    org_name: Operations
+    sat_repos:
+      - Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
+      - Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
+      - Red Hat Satellite Client 6 for RHEL 9 x86_64 RPMs
+
+  tasks:
+    - name: Enable Repositories
+      redhat.satellite.repository_set:
+        name: "{{ item }}"
+        organization: "{{ org_name }}"
+        state: enabled
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        all_repositories: yes
+      loop: "{{ sat_repos }}"
+
+    - name: Create Sync Plan
+      redhat.satellite.sync_plan:
+        name: Sync Plan for Red Hat Products
+        organization: "{{ org_name }}"
+        enabled: true
+        state: present
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        sync_date: "2022-03-15 18:00:00 UTC"
+        interval: custom cron
+        cron_expression: 15 18 * * *
+        products:
+          - 'Red Hat Enterprise Linux for x86_64'
+
+    - name: Sync Repositories
+      redhat.satellite.repository_sync:
+        organization: "{{ org_name }}"
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        product: Red Hat Enterprise Linux for x86_64
+
+
+    - name: Create Build Lifecycle Environment
+      redhat.satellite.lifecycle_environment:
+        name: Build
+        label: Build
+        prior: Library
+        organization: "{{ org_name }}"
+        state: present
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
