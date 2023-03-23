@@ -151,6 +151,7 @@
         lifecycle_environments:
           - Library
           - Development
+          - QA 
 
     - name: Verification of environments to screen
       shell: hammer content-view list --organization Marketing --fields Name,"Last Published","Repository Ids"
@@ -168,4 +169,4 @@
 
     - name: Marketing Lifecycle Environment Paths 
       debug: 
-        var: mmarketing_cv_lcm.stdout_lines
+        var: marketing_cv_lcm.stdout_lines

@@ -5,9 +5,11 @@
   vars:
     org_name: Finance
     sat_repos:
-      - Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs)
-      - Red Hat Enterprise Linux 8 for x86_64 - BaseOS (RPMs)
-      - Red Hat Satellite Tools 6.6 for RHEL 8 x86_64 (RPMs)
+      - Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9
+      - Red Hat Satellite Client 6 for RHEL 9 x86_64 RPMs
+      - Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9 
+    cv_name: FinanceServerBase
+    base_cv_repos: Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9
 
   tasks:
     - name: Enable Repositories
@@ -93,7 +95,7 @@
         password: "{{ sat_pw }}"
         validate_certs: "{{ cert_validate }}"
         repositories:
-          - name: Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8.1
+          - name: "{{ base_cv_repos }}"
             product: Red Hat Enterprise Linux for x86_64
 
     - name: Publish the Base Content View - Not Idempotent
