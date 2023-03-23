@@ -3,9 +3,10 @@
   hosts: localhost
   vars_files: sat_vars.yml
   vars:
-    org_name: Operations
-    org_label: Operations
-    org_desc: Operations Department
+    org_name: Marketing
+    org_label: Marketing
+    org_desc: Marketing Department
+    org_name_one: Operations
     org_locations:
       - Boston
   tasks:
@@ -23,7 +24,7 @@
     - name: Create Lab Locations
       redhat.satellite.location:
         name: "{{ item }}"
-        organizations: "{{ org_name }}"
+        organizations: "{{ org_name_one }}"
         state: present
         server_url: "{{ sat_url }}"
         username: "{{ sat_un }}"
@@ -31,10 +32,6 @@
         validate_certs: "{{ cert_validate }}"
       loop: "{{ org_locations }}"
 
-    - name: Download Manifest from Classroom
-      get_url:
-        url: http://materials/manifest_operations.zip
-        dest: "/tmp/manifest_operations.zip"
 
     - name: Upload Manifest
       redhat.satellite.subscription_manifest:
@@ -44,5 +41,5 @@
         username: "{{ sat_un }}"
         password: "{{ sat_pw }}"
         validate_certs: "{{ cert_validate }}"
-        manifest_path: "/tmp/manifest_operations.zip"
-        repository_url: http://content.example.com/rhs6.6/x86_64/cdn
+        manifest_path: "/home/student/manifest_marketing.zip"
+        repository_url: http://cdn.lab.example.com 
