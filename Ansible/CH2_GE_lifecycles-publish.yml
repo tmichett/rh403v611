@@ -38,6 +38,36 @@
         username: "{{ sat_un }}"
         password: "{{ sat_pw }}"
         validate_certs: "{{ cert_validate }}"
+        description: Initial base repositories
+        lifecycle_environments:
+          - Library
+          - Development
+          - QA
+
+    - name: Update the Base Content View
+      redhat.satellite.content_view:
+        name: "{{ cv_name }}"
+        organization: "{{ org_name_one }}"
+        state: present
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        repositories:
+          - name: "{{ item }}"
+            product: Red Hat Enterprise Linux for x86_64
+      loop: "{{ extended_cv_repos }}"
+
+    - name: Publish the Base Content View - Not Idempotent
+      redhat.satellite.content_view_version:
+        content_view: "{{ cv_name }}"
+        organization: "{{ org_name_one }}"
+        state: present
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        description: Initial base repositories
         lifecycle_environments:
           - Library
           - Development
