@@ -1,4 +1,4 @@
 ---
 collections:
-  - name: "/tmp/rredhat-satellite-3.9.0.tar.gz"
+  - name: "/tmp/redhat-satellite-3.9.0.tar.gz"
     type: file

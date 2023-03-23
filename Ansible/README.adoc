@@ -13,6 +13,18 @@ endif::[]
 :imagesdir: images/
 
 
-= OpenSCAP Playbooks
+= Satellite 6.11 GE and Lab Playbooks
 
-Location to store OSCAP Remediation playbooks and configuration files.
+
+
+source[bash]
+----
+[student@workstation rh403v611]$ cd Ansible/Demo_Prep/
+
+[student@workstation Demo_Prep]$ ansible-playbook SystemSetup.yml
+
+ansible-galaxy collections install -r collections/requirements.yml -p collections/
+----
+
+
+
