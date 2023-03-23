@@ -1,0 +1,52 @@
+---
+- name: Complete Chapter 2 Lab
+  hosts: localhost
+  vars_files: sat_vars.yml
+  vars:
+    org_name: 
+      - Operations
+      - Marketting
+
+  tasks:
+
+    - name: Create Development Lifecycle Environment {{ org_name }}
+      redhat.satellite.lifecycle_environment:
+        name: Development
+        label: Development
+        description: Development 
+        prior: Library
+        organization: "{{ item }}"
+        state: present
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+      loop: "{{ org_name }}"
+
+    - name: Create QA Lifecycle Environment {{ org_name }}
+      redhat.satellite.lifecycle_environment:
+        name: QA
+        label: QA
+        prior: Development
+        description: Quality Assurance
+        organization: "{{ item }}"
+        state: present
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+      loop: "{{ org_name }}"
+
+    - name: Create Production Lifecycle Environment {{ org_name }}
+      redhat.satellite.lifecycle_environment:
+        name: Production
+        label: Production
+        description: Production 
+        prior: QA
+        organization: "{{ item }}"
+        state: present
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+      loop: "{{ org_name }}"

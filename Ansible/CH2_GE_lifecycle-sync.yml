@@ -39,7 +39,7 @@
 
     - name: Create Sync Plan
       redhat.satellite.sync_plan:
-        name: Sync Plan for Red Hat Products
+        name: Red Hat Products - Operations
         organization: "{{ org_name }}"
         enabled: true
         state: present
