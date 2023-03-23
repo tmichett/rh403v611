@@ -158,7 +158,7 @@
       delegate_to: satellite.lab.example.com 
 
     - name: Verification of environments to screen
-      shell:hammer content-view version list --organization Marketing --content-view MarketingServerBase --fields Name,Description,"Lifecycle Environments"
+      shell: hammer content-view version list --organization Marketing --content-view MarketingServerBase --fields Name,Description,"Lifecycle Environments"
       register: marketing_cv_lcm
       delegate_to: satellite.lab.example.com 
 
