@@ -1,5 +1,5 @@
 ---
-- name: Complete Chapter 2 Lab
+- name: Complete Chapter 2 GE - Create Software Lifecycles
   hosts: localhost
   vars_files: sat_vars.yml
   vars:
