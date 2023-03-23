@@ -7,10 +7,11 @@
     sat_repos:
       - rhel-9-for-x86_64-appstream-rpms 
       - rhel-9-for-x86_64-baseos-rpms 
+    sat_client_repos:
       - satellite-client-6-for-rhel-9-x86_64-rpms
 
   tasks:
-    - name: Enable Repositories
+    - name: Enable Repositories for RHEL Servers
       redhat.satellite.repository_set:
         label: "{{ item }}"
         organization: "{{ org_name }}"
@@ -22,6 +23,19 @@
         repositories:
           - releasever: "9"
       loop: "{{ sat_repos }}"
+
+    - name: Enable Repositories Satellite Clients 
+      redhat.satellite.repository_set:
+        label: "{{ item }}"
+        organization: "{{ org_name }}"
+        state: enabled
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        all_repositories: yes
+      loop: "{{ sat_client_repos }}"
+
 
     - name: Create Sync Plan
       redhat.satellite.sync_plan:
