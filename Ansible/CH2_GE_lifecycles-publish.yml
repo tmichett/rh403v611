@@ -8,9 +8,7 @@
     cv_name: OperationsServerBase
     base_cv_repos:
       - Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9 
-    extended_cv_repos:
-      - Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9
-      -  Red Hat Satellite Client 6 for RHEL 9 x86_64 RPMs
+
 
 
   tasks:
@@ -25,9 +23,9 @@
         password: "{{ sat_pw }}"
         validate_certs: "{{ cert_validate }}"
         repositories:
-          - name: "{{ item }}"
+          - name: "{{ base_cv_repos }}"
             product: Red Hat Enterprise Linux for x86_64
-      loop: "{{ base_cv_repos }}"
+
 
     - name: Publish the Base Content View - Not Idempotent
       redhat.satellite.content_view_version:
@@ -54,9 +52,12 @@
         password: "{{ sat_pw }}"
         validate_certs: "{{ cert_validate }}"
         repositories:
-          - name: "{{ item }}"
+          - name: Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9
             product: Red Hat Enterprise Linux for x86_64
-      loop: "{{ extended_cv_repos }}"
+          - name: Red Hat Satellite Client 6 for RHEL 9 x86_64 RPMs
+            product: Red Hat Enterprise Linux for x86_64
+          - name: Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9 
+            product: Red Hat Enterprise Linux for x86_64           
 
     - name: Publish the Base Content View - Not Idempotent
       redhat.satellite.content_view_version:
