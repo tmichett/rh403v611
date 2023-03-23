@@ -15,15 +15,15 @@ endif::[]
 
 = Satellite 6.11 GE and Lab Playbooks
 
+Preparing to use Ansible and Ansible Playbooks
 
-
-source[bash]
+[source,bash]
 ----
 [student@workstation rh403v611]$ cd Ansible/Demo_Prep/
 
 [student@workstation Demo_Prep]$ ansible-playbook SystemSetup.yml
 
-ansible-galaxy collections install -r collections/requirements.yml -p collections/
+[student@workstation Ansible]$ ansible-galaxy collections install -r collections/requirements.yml -p collections/
 ----
 
 
