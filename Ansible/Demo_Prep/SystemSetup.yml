@@ -1,0 +1,11 @@
+---
+- name: Prepare Demos
+  hosts: localhost
+  vars_files: sat_vars.yml
+
+  tasks:
+    - name: Copy Red Hat Satellite Collections
+      copy:
+        src: Files/redhat-satellite-3.9.0.tar.gz
+        dest: /tmp
+
