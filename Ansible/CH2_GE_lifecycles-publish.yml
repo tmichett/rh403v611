@@ -6,8 +6,7 @@
     org_name_one: Operations
     org_name_two: Marketing
     cv_name: OperationsServerBase
-    base_cv_repos:
-      - Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9 
+    base_cv_repos: Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9
 
 
 
