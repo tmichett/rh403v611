@@ -9,9 +9,9 @@
   tasks:
 
     - name: Copy Roles to Satellite and Capsule 
-        ansible.posix.synchronize:
-          compress: true
-          dest: /etc/ansible/roles/
-          src: ../Role/webserver
+      ansible.posix.synchronize:
+        compress: true
+        dest: /etc/ansible/roles/
+        src: ../Role/webserver
 
       
