@@ -1,0 +1,17 @@
+---
+- name: CH5 GE - Creating Custom Products and Repos
+  hosts: satellite.lab.example.com, capsule.lab.example.com
+  vars_files: sat_vars.yml
+  vars:
+    org_name: Operations
+    org_label: Operations
+
+  tasks:
+
+    - name: Copy Roles to Satellite and Capsule 
+        ansible.posix.synchronize:
+          compress: true
+          dest: /etc/ansible/roles/
+          src: ../Role/webserver
+
+      
