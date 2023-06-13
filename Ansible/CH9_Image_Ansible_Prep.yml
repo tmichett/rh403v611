@@ -20,3 +20,4 @@
 
     - name: Import Webserver Role
       shell: hammer ansible roles import --proxy-id 1 --role-names webserver
+      delegate_to: satellite.lab.example.com
