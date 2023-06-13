@@ -14,4 +14,9 @@
         dest: /etc/ansible/roles/
         src: ../Role/webserver
 
-      
+    - name: Set Remote Execution to Connect by IP Address
+      shell: hammer settings set --name remote_execution_connect_by_ip --value yes
+      delegate_to: satellite.lab.example.com
+
+    - name: Import Webserver Role
+      shell: hammer ansible roles import --proxy-id 1 --role-names webserver
