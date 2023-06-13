@@ -22,6 +22,8 @@
       shell: hammer ansible roles import --proxy-id 1 --role-names webserver
       delegate_to: satellite.lab.example.com
 
-    - name: Ensure Ansible Services available on Capsule server
-      shell: satellite-installer --scenario capsule --enable-foreman-proxy-plugin-ansible
-      delegate_to: capsule.lab.example.com
+#### Adding as a lab step as it might take too long for it to run/execute capsule.lab.example.com
+
+#    - name: Ensure Ansible Services available on Capsule server
+#      shell: satellite-installer --scenario capsule --enable-foreman-proxy-plugin-ansible
+#      delegate_to: capsule.lab.example.com
