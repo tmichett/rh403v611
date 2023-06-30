@@ -1,0 +1,11 @@
+[satellite-6.11-for-rhel-8-x86_64-rpms]
+baseurl = http://content.example.com/rhel9.0/x86_64/rhel9-additional/x86_64/dvd/Satellite
+enabled = true
+gpgcheck = false
+name = Red Hat Satellite 6.11 for RHEL 8 x86_64 (dvd)
+
+[satellite-maintenance-6.11-for-rhel-8-x86_64-rpms]
+baseurl = http://content.example.com/rhel9.0/x86_64/rhel9-additional/x86_64/dvd/Maintenance
+enabled = true
+gpgcheck = false
+name = Red Hat Satellite Maintenance 6.11 for RHEL 8 x86_64 (dvd)
