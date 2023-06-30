@@ -1,6 +1,6 @@
 ---
 - name: Fix Satellite Yum Repos
-  hosts: satellite
+  hosts: satellite.lab.example.com
 
   tasks:
 
