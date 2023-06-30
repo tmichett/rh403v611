@@ -5,6 +5,6 @@
   tasks:
 
     - name: Replace /etc/yum.repos.d/rhs_dvd.repo file on Satellite
-      ansible.builtin.copy::
+      ansible.builtin.copy:
         src: Files/rhs_dvd.repo
         dest: /etc/yum.repos.d/rhs_dvd.repo
