@@ -1,0 +1,7 @@
+- name: Create Webserver Index.html File
+  template:
+    src: index_html.j2
+    dest: /var/www/html/index.html
+    mode: 0644
+    owner: apache
+    group: apache

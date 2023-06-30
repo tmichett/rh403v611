@@ -1,0 +1,29 @@
+---
+- name: CH5 GE - Creating Custom Products and Repos
+  hosts: satellite.lab.example.com, capsule.lab.example.com
+  vars_files: sat_vars.yml
+  vars:
+    org_name: Operations
+    org_label: Operations
+
+  tasks:
+
+    - name: Copy Roles to Satellite and Capsule 
+      ansible.posix.synchronize:
+        compress: true
+        dest: /etc/ansible/roles/
+        src: ../Role/webserver
+
+    - name: Set Remote Execution to Connect by IP Address
+      shell: hammer settings set --name remote_execution_connect_by_ip --value yes
+      delegate_to: satellite.lab.example.com
+
+    - name: Import Webserver Role
+      shell: hammer ansible roles import --proxy-id 1 --role-names webserver
+      delegate_to: satellite.lab.example.com
+
+#### Adding as a lab step as it might take too long for it to run/execute capsule.lab.example.com
+
+#    - name: Ensure Ansible Services available on Capsule server
+#      shell: satellite-installer --scenario capsule --enable-foreman-proxy-plugin-ansible
+#      delegate_to: capsule.lab.example.com
