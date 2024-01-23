@@ -6,3 +6,5 @@ collections:
     type: file
   - name: "/tmp/ansible-posix-1.5.1.tar.gz"
     type: file
+  - name: "/tmp/community-general-7.5.1.tar.gz"
+    type: file

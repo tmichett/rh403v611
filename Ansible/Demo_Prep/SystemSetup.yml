@@ -13,3 +13,10 @@
       copy:
         src: Files/ansible-posix-1.5.1.tar.gz
         dest: /tmp
+  
+    - name: Copy Red Hat Satellite Collections
+      copy:
+        src: Files/community-general-7.5.1.tar.gz
+        dest: /tmp
+
+
