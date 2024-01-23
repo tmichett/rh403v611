@@ -8,9 +8,9 @@
       - Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
       - Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
       - Red Hat Satellite Tools 6.6 for RHEL 9 x86_64 (RPMs)
-    activation_key: FinanceKey
-    lifecycle_env: Library
-    content_view: Default Organization View
+    activation_key: FinanceServers
+    lifecycle_env: Build
+    content_view: FinanceServerBase
     subscriptions:
       - name: "Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)"
       - name: "Red Hat Satellite Infrastructure Subscription"

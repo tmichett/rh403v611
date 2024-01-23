@@ -40,7 +40,7 @@
 
     - name: Create Sync Plan
       redhat.satellite.sync_plan:
-        name: Sync Plan for Red Hat Products
+        name: Red Hat Products - Finance
         organization: "{{ org_name }}"
         enabled: true
         state: present
@@ -101,7 +101,7 @@
 
     - name: Create the Base Content View
       redhat.satellite.content_view:
-        name: Base
+        name: FinanceServerBase
         organization: "{{ org_name }}"
         state: present
         server_url: "{{ sat_url }}"
@@ -114,7 +114,7 @@
 
     - name: Publish the Base Content View - Not Idempotent
       redhat.satellite.content_view_version:
-        content_view: Base
+        content_view: FinanceServerBase
         organization: "{{ org_name }}"
         state: present
         server_url: "{{ sat_url }}"
