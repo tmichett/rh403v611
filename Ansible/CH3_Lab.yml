@@ -46,7 +46,7 @@
         validate_certs: "{{ cert_validate }}"
         unlimited_hosts: yes
         host_collections: FinanceServers
-        release_version: 8.1
+        release_version: 9
         content_overrides:
         - label: "{{ item }}"
           override: enabled
