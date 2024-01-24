@@ -57,6 +57,27 @@
           - Library
           - Build
 
+    - name: Enable Repository RHEL 9 HA
+      redhat.satellite.repository_set:
+        label: rhel-9-for-x86_64-highavailability-rpms
+        organization: "{{ org_name }}"
+        state: enabled
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        repositories:
+          - releasever: "9"
+
+    - name: Sync Repositories to get HA
+      redhat.satellite.repository_sync:
+        organization: "{{ org_name }}"
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        product: Red Hat Enterprise Linux for x86_64
+
     - name: Create FinBaseHA Content View
       redhat.satellite.content_view:
         name: BaseHAComposite
