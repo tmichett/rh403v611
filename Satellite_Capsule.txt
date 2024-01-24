@@ -1,0 +1,13 @@
+On Satellite
+
+[root@satellite ~]# capsule-certs-generate --foreman-proxy-fqdn capsule.lab.example.com --certs-tar /root/capsule_certs.tar | tee capsule_install_cmd.txt
+
+capsule-certs-generate --foreman-proxy-fqdn capsule.lab.example.com --certs-tar /root/capsule_certs.tar | tee capsule_install_cmd.txt
+
+** COPY Satellite-Installer Command
+
+scp /root/capsule_certs.tar root@capsule.lab.example.com:/root/capsule_certs.tar
+
+** Take installer command and install on capsule (can use what is in capsule_install_cmd.txt )
+
+
