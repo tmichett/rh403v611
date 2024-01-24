@@ -171,3 +171,9 @@
         activationkey: "{{ activation_key }}"
         org_id: "{{ org_name }}"
       when: activation_key is defined
+
+## Ugly Cheat for Lab Solutions
+    - name: Update ServerB using Hammer 
+      shell: hammer host update --name serverb.lab.example.com --lifecycle-environment Test --content-view BaseHAComposite --organization Finance
+      delegate_to: satellite
+      ansible_user: root
