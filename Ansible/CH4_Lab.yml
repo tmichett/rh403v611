@@ -176,4 +176,3 @@
     - name: Update ServerB using Hammer 
       shell: hammer host update --name serverb.lab.example.com --lifecycle-environment Test --content-view BaseHAComposite --organization Finance
       delegate_to: satellite
-      ansible_user: root
