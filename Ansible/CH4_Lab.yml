@@ -114,6 +114,7 @@
         username: "{{ sat_un }}"
         password: "{{ sat_pw }}"
         validate_certs: "{{ cert_validate }}"
+        composite: true
         auto_publish: true
         components:
           - content_view: FinBaseHA
