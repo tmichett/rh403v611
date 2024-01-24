@@ -91,6 +91,7 @@
           - name: Red Hat Enterprise Linux 9 for x86_64 - High Availability RPMs 9
             product: Red Hat Enterprise Linux High Availability for x86_64 
 
+    - name: Publish the BaseHAComposite Content View - Not Idempotent
       redhat.satellite.content_view_version:
         content_view: BaseHAComposite
         organization: "{{ org_name }}"
@@ -112,6 +113,8 @@
         username: "{{ sat_un }}"
         password: "{{ sat_pw }}"
         validate_certs: "{{ cert_validate }}"
+
+
 
 
 - name: Complete Chapter 4 Lab -  Register Host ServerB To Satellite
