@@ -1,0 +1,5 @@
+- hosts: servers
+
+  tasks:
+    - name: Set Remote Execution to Connect by IP Address
+      shell: curl https://capsule.example.com:9090/ssh/pubkey >> ~/.ssh/authorized_keys
