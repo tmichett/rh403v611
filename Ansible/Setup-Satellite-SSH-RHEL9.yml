@@ -1,5 +1,7 @@
 - hosts: Servers
 
   tasks:
-    - name: Set Remote Execution to Connect by IP Address
-      shell: curl https://capsule.example.com:9090/ssh/pubkey >> ~/.ssh/authorized_keys
+    - name: Copy Satellite SSH Key
+      shell: curl https://satellite.lab.example.com:9090/ssh/pubkey >> ~/.ssh/authorized_keys  
+    - name: Copy Satellite Capsule SSH Key
+      shell: curl https://capsule.lab.example.com:9090/ssh/pubkey >> ~/.ssh/authorized_keys
