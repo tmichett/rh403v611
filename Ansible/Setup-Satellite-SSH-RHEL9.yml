@@ -1,4 +1,4 @@
-- hosts: servers
+- hosts: Servers
 
   tasks:
     - name: Set Remote Execution to Connect by IP Address
