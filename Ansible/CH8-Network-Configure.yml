@@ -1,0 +1,55 @@
+---
+- name: CH8 GE - Lab Network Configure
+  hosts: localhost
+  vars_files: sat_vars.yml
+  vars:
+    org_name: Operations
+    sat_repos:
+      - rhel-9-for-x86_64-appstream-rpms 
+      - rhel-9-for-x86_64-baseos-rpms 
+      - 
+      - 
+  tasks:
+
+    - name: Enable Repositories for RHEL Servers
+      redhat.satellite.repository_set:
+        label: "{{ item }}"
+        organization: "{{ org_name }}"
+        state: enabled
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        repositories:
+          - releasever: "9"
+      loop: "{{ sat_repos }}"
+
+    - name: Sync Repositories
+      redhat.satellite.repository_sync:
+        organization: "{{ org_name }}"
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        product: Red Hat Enterprise Linux for x86_64
+
+    - name: Update the Base Content View
+      redhat.satellite.content_view:
+        name: OperationsServerBase
+        organization: "{{ org_name }}"
+        state: present
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        repositories:
+          - name: Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9
+            product: Red Hat Enterprise Linux for x86_64
+          - name: Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9
+            product: Red Hat Enterprise Linux for x86_64  
+          - name: Red Hat Satellite Client 6 for RHEL 9 x86_64 RPMs
+            product: Red Hat Enterprise Linux for x86_64
+          - name: Red Hat Enterprise Linux 9 for x86_64 - AppStream Kickstart 9.0
+            product: Red Hat Enterprise Linux for x86_64
+          - name: Hat Enterprise Linux 9 for x86_64 - BaseOS Kickstart 9.0
+            product: Red Hat Enterprise Linux for x86_64            
