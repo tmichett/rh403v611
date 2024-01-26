@@ -7,11 +7,12 @@
     sat_repos:
       - rhel-9-for-x86_64-appstream-rpms 
       - rhel-9-for-x86_64-baseos-rpms 
-      - rhel-9-for-x86_64-appstream-kickstart
+    ks_sat_repos:
+      - rhel-9-for-x86_64-appstream-kickstart   ### NOTES - Had to have KS repos as they are locked to specific release 9.0 and not generic version 9
       - rhel-9-for-x86_64-baseos-kickstart
   tasks:
 
-    - name: Enable Repositories for RHEL Servers
+    - name: Enable RPM Repositories for RHEL Servers
       redhat.satellite.repository_set:
         label: "{{ item }}"
         organization: "{{ org_name }}"
@@ -23,9 +24,8 @@
         repositories:
           - releasever: "9"
       loop: "{{ sat_repos }}"
-      ignore_errors: true
 
-    - name: Enable Repositories for RHEL Servers
+    - name: Enable Kickstart Repositories for RHEL Servers
       redhat.satellite.repository_set:
         label: "{{ item }}"
         organization: "{{ org_name }}"
@@ -36,8 +36,7 @@
         validate_certs: "{{ cert_validate }}"
         repositories:
           - releasever: "9.0"
-      loop: "{{ sat_repos }}"
-      ignore_errors: false
+      loop: "{{ ks_sat_repos }}"
       
 
     - name: Sync Repositories
