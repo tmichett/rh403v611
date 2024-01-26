@@ -23,6 +23,22 @@
         repositories:
           - releasever: "9"
       loop: "{{ sat_repos }}"
+      ignore_errors: true
+
+    - name: Enable Repositories for RHEL Servers
+      redhat.satellite.repository_set:
+        label: "{{ item }}"
+        organization: "{{ org_name }}"
+        state: enabled
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        repositories:
+          - releasever: "9.0"
+      loop: "{{ sat_repos }}"
+      ignore_errors: false
+      
 
     - name: Sync Repositories
       redhat.satellite.repository_sync:
