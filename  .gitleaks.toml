@@ -1,0 +1,9 @@
+[allowlist]
+  description = "Global Allowlist"
+
+  # Ignore Collections
+  paths = [
+    # Ignore all example items 
+    '''\/ansible/*''',
+
+  ]
