@@ -1,0 +1,12 @@
+
+.On Satellite Server
+[source,bash]
+----
+mkdir -p ~/.hammer/cli.modules.d
+----
+
+.On Workstation
+[source,bash]
+----
+scp foreman.yml satellite:~/.hammer/cli.modules.d/foreman.yml
+----
