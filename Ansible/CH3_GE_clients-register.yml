@@ -1,0 +1,45 @@
+---
+- name: Complete Chapter 3 GE - Register and Configure Content Hosts
+  hosts: serverc.lab.example.com
+  vars_files: sat_vars.yml
+  vars:
+    org_name: Marketing
+    sat_repos:
+      - Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
+      - Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
+      - Red Hat Satellite Tools 6.6 for RHEL 9 x86_64 (RPMs)
+    lifecycle_env: Development
+    content_view: MarketingServerBase
+    subscriptions:
+      - name: "Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)"
+      - name: "Red Hat Satellite Infrastructure Subscription"
+    organization: "{{ org_name }}"
+    repositories:
+      - satellite-client-6-for-rhel-9-x86_64-rpms
+      - rhel-9-for-x86_64-baseos-rpms
+      - rhel-9-for-x86_64-appstream-rpms
+  tasks:
+
+    - name: Unregister Server
+      redhat_subscription:
+        state: absent
+
+    - name: Prepare System for Satellite Registration - Get Cert
+      get_url:
+        url: "{{ sat_url }}/pub/katello-ca-consumer-latest.noarch.rpm"
+        dest: /tmp/katello-latest.rpm
+        validate_certs: no
+
+    - name: Install Katello rpm
+      yum:
+        name: /tmp/katello-latest.rpm
+        state: latest
+        disable_gpg_check: yes
+
+    - name: Register with Subscription Manager
+      redhat_subscription:
+        state: present
+        org_id: "{{ org_name }}"
+        environment: "{{ lifecycle_env }}/{{ content_view }}"
+        username: admin
+        password: redhat
