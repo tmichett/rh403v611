@@ -1,0 +1,27 @@
+---
+- name: Complete Chapter 3 Lab - Setup Activation Key
+  hosts: localhost
+  vars_files: sat_vars.yml
+  vars:
+    org_name: Operations
+    sat_repos:
+      - Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
+      - Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
+      - Red Hat Satellite Tools 6.6 for RHEL 9 x86_64 (RPMs)
+    organization: "{{ org_name }}"
+    repositories:
+      - satellite-client-6-for-rhel-9-x86_64-rpms
+      - rhel-9-for-x86_64-baseos-rpms
+      - rhel-9-for-x86_64-appstream-rpms
+
+  tasks:
+    - name: Create the OpsServers Host Collection
+      redhat.satellite.host_collection:
+        name: OpsServers
+        description: Operations Servers
+        organization: "{{ org_name }}"
+        state: present
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
