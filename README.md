@@ -41,3 +41,34 @@ Can grade the lab after running playbook with
 ```
 [student@workstation Ansible]$ lab grade deploy-review
 ```
+
+
+## Chapter 2
+
+**GE: Publish and Promote Content Views**
+```
+ansible-playbook CH2_GE_lifecycle-sync.yml
+```
+
+
+Need to run both **lab start* commands to leverage the playbooks.
+
+**GE: Synchronize Red Hat Content**
+```
+lab start  lifecycles-create
+
+ansible-playbook CH2_GE_lifecycles-create.yml
+```
+
+**GE: Publish and Promote Content Views**
+```
+lab start lifecycles-publish
+
+ansible-playbook CH2_GE_lifecycles-publish.yml
+```
+
+**LAB: Manage Software Lifecycles**
+```
+ansible-playbook CH2_Lab.yml
+lab grade lifecycles-review
+```
