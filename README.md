@@ -72,3 +72,25 @@ ansible-playbook CH2_GE_lifecycles-publish.yml
 ansible-playbook CH2_Lab.yml
 lab grade lifecycles-review
 ```
+
+## Chapter 3
+
+GE playbooks in progress
+
+
+**LAB: Register Hosts**
+```
+ansible-playbook CH3_Lab.yml
+lab grade clients-review
+```
+
+## Chapter 4
+
+GE playbooks (TBD)
+
+
+**LAB: Deploy Software to Hosts**
+```
+ansible-playbook CH4_Lab.yml
+lab grade software-review
+```
