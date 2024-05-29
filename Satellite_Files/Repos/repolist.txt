@@ -1,0 +1,3 @@
+Microsoft Edge Repo
+https://packages.microsoft.com/yumrepos/edge/
+https://packages.microsoft.com/yumrepos/vscode/
