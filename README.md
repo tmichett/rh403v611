@@ -94,3 +94,12 @@ GE playbooks (TBD)
 ansible-playbook CH4_Lab.yml
 lab grade software-review
 ```
+
+## Chapter 5
+
+**REPO Discovery**
+
+https://packages.microsoft.com/yumrepos/edge/
+https://packages.microsoft.com/yumrepos/  **Way more extensive list**
+http://download1.rpmfusion.org/free/fedora/releases/40/   **For Fedora 40**
+
