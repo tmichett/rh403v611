@@ -1,6 +1,6 @@
 ---
 - name: CH8 GE - Lab Network Provisioning Configure
-  hosts: capsule
+  hosts: capsule.lab.example.com
   vars_files: sat_vars.yml
 
   tasks: 
