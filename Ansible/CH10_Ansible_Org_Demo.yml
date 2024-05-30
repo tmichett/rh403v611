@@ -1,0 +1,21 @@
+---
+- name: Chapter 10 - Ansible Demo 
+  hosts: localhost
+  vars_files: sat_vars.yml
+  tasks:
+    - name: Show all organizations
+      redhat.satellite.organization_info:
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        search:
+      register: organizations
+
+    - name: Print Organizations
+      ansible.builtin.debug:
+        var: organizations
+
+    - name: Print Organization Names
+      ansible.builtin.debug:
+        var: organizations | json_query('organizations[*].name')
