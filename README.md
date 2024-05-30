@@ -100,6 +100,50 @@ lab grade software-review
 **REPO Discovery**
 
 https://packages.microsoft.com/yumrepos/edge/
+
 https://packages.microsoft.com/yumrepos/  **Way more extensive list**
+
 http://download1.rpmfusion.org/free/fedora/releases/40/   **For Fedora 40**
 
+
+## Chapter 10
+
+Before Demo run the Install JQ Playbook
+```
+CH10_Install_JQ.yml
+```
+
+**API Demo**
+
+Commands are in the txt file **API_Commands.txt**
+
+List hosts by Name
+```
+curl --request GET --user admin:redhat https://satellite.lab.example.com/api/v2/hosts | jq | grep '"name":'
+```
+
+List Orgs by Name
+```
+curl --request GET --user admin:redhat https://satellite.lab.example.com/api/v2/organizations | jq | grep '"name":'
+```
+
+Plus many more ...
+
+There is also a playbook demo here showing the Ansible URI Module to leverage the API
+
+List Orgs by Name
+```
+ansible-playbook CH10_API_Demo.yml
+```
+
+**Ansible Demo**
+
+In order to use all the playbook features, the Ansible Satellite Collection and modules need installed as well as the python-jmespath package.
+
+```
+sudo -i dnf install python-jmespath
+```
+
+```
+ansible-playbook CH10_Ansible_Org_Demo.yml
+```
