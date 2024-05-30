@@ -1,0 +1,16 @@
+name = "webserver"
+description = "Blueprint for webserver systems"
+version = "1.0.0"
+modules = []
+[[groups]]
+name = "Minimal Install"
+distro = ""
+[[packages]]
+name = "grub2"
+[[packages]]
+name = "httpd"
+version = "2.4.51"
+[[packages]]
+name = "lvm2"
+[customizations.services]
+enabled = ["sshd", "httpd"]
