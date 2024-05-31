@@ -1,0 +1,41 @@
+---
+- name: Complete Chapter 10  GE - Publish Content Views to a Satellite Capsule Server
+  hosts: localhost
+  vars_files: sat_vars.yml
+  vars:
+    org_name_one: Operations
+    cv_name: Boston HA Project
+
+  tasks:
+ 
+    - name: Update the Base Content View
+      redhat.satellite.content_view:
+        name: "{{ cv_name }}"
+        organization: "{{ org_name_one }}"
+        state: present
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        repositories:
+          - name: Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9
+            product: Red Hat Enterprise Linux for x86_64
+          - name: Red Hat Enterprise Linux 9 for x86_64 - High Availability RPMs 9 
+            product: Red Hat Enterprise Linux for x86_64
+          - name: Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9 
+            product: Red Hat Enterprise Linux for x86_64           
+
+    - name: Publish the Base Content View - Not Idempotent
+      redhat.satellite.content_view_version:
+        content_view: "{{ cv_name }}"
+        organization: "{{ org_name_one }}"
+        state: present
+        server_url: "{{ sat_url }}"
+        username: "{{ sat_un }}"
+        password: "{{ sat_pw }}"
+        validate_certs: "{{ cert_validate }}"
+        description: Initial base repositories
+        lifecycle_environments:
+          - Library
+          - Development
+
