@@ -1,0 +1,10 @@
+---
+- name: CH6 GE - Capsule Enable 
+  hosts: capsule.lab.example.com
+  vars_files: sat_vars.yml
+
+  tasks: 
+    - name: Setup Capsule Ansible Components
+      shell: |
+        satellite-installer --scenario capsule \
+        --enable-foreman-proxy-plugin-ansible
