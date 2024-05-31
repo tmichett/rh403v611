@@ -127,6 +127,11 @@ List Orgs by Name
 curl --request GET --user admin:redhat https://satellite.lab.example.com/api/v2/organizations | jq | grep '"name":'
 ```
 
+Fancy JSON with JQ list hosts by name and ignore certificate with **-k** option
+```
+curl -k --request GET --user admin:redhat https://satellite.lab.example.com/api/v2/organizations | jq '.results[] | {name}'
+```
+
 Plus many more ...
 
 There is also a playbook demo here showing the Ansible URI Module to leverage the API
