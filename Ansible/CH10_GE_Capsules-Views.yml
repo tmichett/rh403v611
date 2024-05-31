@@ -8,9 +8,10 @@
 
   tasks:
  
-    - name: Update the Base Content View
+    - name: Update the Boston HA Project Content View
       redhat.satellite.content_view:
         name: "{{ cv_name }}"
+        description: HA packages for Boston project
         organization: "{{ org_name_one }}"
         state: present
         server_url: "{{ sat_url }}"
@@ -21,11 +22,11 @@
           - name: Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9
             product: Red Hat Enterprise Linux for x86_64
           - name: Red Hat Enterprise Linux 9 for x86_64 - High Availability RPMs 9 
-            product: Red Hat Enterprise Linux for x86_64
+            product: Red Hat Enterprise Linux High Availability for x86_64
           - name: Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9 
             product: Red Hat Enterprise Linux for x86_64           
 
-    - name: Publish the Base Content View - Not Idempotent
+    - name: Publish the {{ cv_name }} Content View - Not Idempotent
       redhat.satellite.content_view_version:
         content_view: "{{ cv_name }}"
         organization: "{{ org_name_one }}"
